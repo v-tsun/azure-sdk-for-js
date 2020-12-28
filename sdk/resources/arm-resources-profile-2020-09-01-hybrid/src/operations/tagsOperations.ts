@@ -258,6 +258,39 @@ export class TagsOperations {
   }
 
   /**
+   * This operation is used to edit tag for Azure stack, since Azure stack only support put method instead of patch method
+   * @summary Selectively updates the set of tags on a resource or subscription for Azure Stack.
+   * @param scope The resource scope.
+   * @param parameters
+   * @param [options] The optional parameters
+   * @returns Promise<Models.TagsUpdateAtScopeResponse>
+   */
+  azureStackUpdateAtScope(scope: string, parameters: Models.TagsPutResource, options?: msRest.RequestOptionsBase): Promise<Models.TagsUpdateAtScopeResponse>;
+  /**
+   * @param scope The resource scope.
+   * @param parameters
+   * @param callback The callback
+   */
+  azureStackUpdateAtScope(scope: string, parameters: Models.TagsPutResource, callback: msRest.ServiceCallback<Models.TagsResource>): void;
+  /**
+   * @param scope The resource scope.
+   * @param parameters
+   * @param options The optional parameters
+   * @param callback The callback
+   */
+  azureStackUpdateAtScope(scope: string, parameters: Models.TagsPutResource, options: msRest.RequestOptionsBase, callback: msRest.ServiceCallback<Models.TagsResource>): void;
+  azureStackUpdateAtScope(scope: string, parameters: Models.TagsPutResource, options?: msRest.RequestOptionsBase | msRest.ServiceCallback<Models.TagsResource>, callback?: msRest.ServiceCallback<Models.TagsResource>): Promise<Models.TagsUpdateAtScopeResponse> {
+    return this.client.sendOperationRequest(
+      {
+        scope,
+        parameters,
+        options
+      },
+      azureStackUpdateAtScopeOperationSpec,
+      callback) as Promise<Models.TagsUpdateAtScopeResponse>;
+  }
+
+  /**
    * @summary Gets the entire set of tags on a resource or subscription.
    * @param scope The resource scope.
    * @param [options] The optional parameters
@@ -519,6 +552,36 @@ const updateAtScopeOperationSpec: msRest.OperationSpec = {
     parameterPath: "parameters",
     mapper: {
       ...Mappers.TagsPatchResource,
+      required: true
+    }
+  },
+  responses: {
+    200: {
+      bodyMapper: Mappers.TagsResource
+    },
+    default: {
+      bodyMapper: Mappers.CloudError
+    }
+  },
+  serializer
+};
+
+const azureStackUpdateAtScopeOperationSpec: msRest.OperationSpec = {
+  httpMethod: "PUT",
+  path: "{scope}",
+  urlParameters: [
+    Parameters.scope
+  ],
+  queryParameters: [
+    Parameters.apiVersion
+  ],
+  headerParameters: [
+    Parameters.acceptLanguage
+  ],
+  requestBody: {
+    parameterPath: "parameters",
+    mapper: {
+      ...Mappers.TagsPutResource,
       required: true
     }
   },

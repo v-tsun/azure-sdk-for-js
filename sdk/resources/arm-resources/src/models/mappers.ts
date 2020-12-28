@@ -2271,6 +2271,28 @@ export const TagsPatchResource: msRest.CompositeMapper = {
   }
 };
 
+export const TagsPutResource: msRest.CompositeMapper = {
+  serializedName: "TagsPutResource",
+  type: {
+    name: "Composite",
+    className: "TagsPutResource",
+    modelProperties: {
+      location: {
+        serializedName: "location",
+        type: {
+          name: "String"
+        }
+      },
+      tags: {
+        serializedName: "tags",
+        type: {
+          name: "Object",
+        }
+      }
+    }
+  }
+};
+
 export const TagsResource: msRest.CompositeMapper = {
   serializedName: "TagsResource",
   type: {

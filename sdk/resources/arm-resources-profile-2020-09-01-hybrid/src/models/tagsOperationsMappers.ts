@@ -39,6 +39,7 @@ export {
   Tags,
   TagsListResult,
   TagsPatchResource,
+  TagsPutResource,
   TagsResource,
   TagValue,
   TemplateLink
